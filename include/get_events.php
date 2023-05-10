@@ -59,5 +59,16 @@ function getEvents($eventName = NULL, $dateBegin = NULL, $dateEnd = NULL, $aggre
 	$stmt = $conn->prepare($sql);
 	$stmt->bind_param("ssssss", $dateBegin, $dateBegin, $dateEnd, $dateEnd, $eventName, $eventName);
 	$stmt->execute();
-	return $stmt->get_result();
+	$result = $stmt->get_result();
+	$json = array();
+	while ($event = mysqli_fetch_assoc($result)) {
+		$json[] = array(
+			'count' => $event['count'],
+			'event'=> $event['name'],
+			'ip'=> $event['ip'],
+			'user_status'=> $event['is_auth'], 
+			'date'=>$event['date'] 
+		);
+	}
+	return json_encode($json);
 }
