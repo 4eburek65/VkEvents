@@ -8,6 +8,7 @@ function addEvent($eventName, $isAuthorize = 0)
 			VALUES (?, ?, ?, ?)
 		";
 		$stmt = $conn->prepare($sql);
+		$date = date("Y-m-d H:i:s");
 		$ip = '';
 		if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
 			$ip = $_SERVER['HTTP_CLIENT_IP'];
@@ -16,7 +17,7 @@ function addEvent($eventName, $isAuthorize = 0)
 		} elseif (!empty($_SERVER['REMOTE_ADDR'])) {
 			$ip = $_SERVER['REMOTE_ADDR'];
 		}
-		$stmt->bind_param("siss", $eventName, $isAuthorize, $ip, date("Y-m-d H:i:s"));
+		$stmt->bind_param("siss", $eventName, $isAuthorize, $ip, $date);
 		$stmt->execute();
 		return true;
 	}
