@@ -19,6 +19,7 @@ function addEvent($eventName, $isAuthorize = 0)
 		}
 		$stmt->bind_param("siss", $eventName, $isAuthorize, $ip, $date);
 		$stmt->execute();
+		redirect();
 		return true;
 	}
 	return false;
