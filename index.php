@@ -100,7 +100,7 @@ if (!empty($_POST)) {
 				<tr>
 					<td><?=$item->event ?></td>
 					<td><?=$item->ip ?></td>
-					<td><?=$item->is_auth ?></td>
+					<td><?=$item->user_status ?></td>
 					<td><?=$item->date ?></td>
 					<td><?=$item->count ?></td>
 				</tr>
