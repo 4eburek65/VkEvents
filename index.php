@@ -94,29 +94,17 @@ if (!empty($_POST)) {
 	</tr>
 	<div style="margin:10px">
 		<?php
-
 			$events = getEvents($eventName, $dateBegin, $dateEnd, $agregBy);
-			$json['result'] = array();
-			// while ($event = mysqli_fetch_assoc($events)) {
-			// 	$json['result'][] = array(
-			// 		'count' => $event['count'],
-			// 		'event'=> $event['name'],
-			// 		'ip'=> $event['ip'],
-			// 		'user_status'=> $event['is_auth'], 
-			// 		'date'=>$event['date'] 
-			// 	);
-			// }
-			while ($event = mysqli_fetch_assoc($events)) { ?>
+			$decode = json_decode($events);
+			foreach ($decode as $item) { ?>
 				<tr>
-					<td><?=$event['name'] ?></td>
-					<td><?=$event['ip'] ?></td>
-					<td><?=$event['is_auth'] ?></td>
-					<td><?=$event['date'] ?></td>
-					<td><?=$event['count'] ?></td>
+					<td><?=$item->event ?></td>
+					<td><?=$item->ip ?></td>
+					<td><?=$item->is_auth ?></td>
+					<td><?=$item->date ?></td>
+					<td><?=$item->count ?></td>
 				</tr>
-				<?php
-			}
-		?>
+				<?php } ?>
 		</table>
 	</div>
 </body>
